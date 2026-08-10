@@ -1,10 +1,10 @@
 import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const PARCEIROS = [
-  { nome: "Banco do Brasil", src: "/parceiros/banco-do-brasil.png", cls: "h-14 sm:h-16" },
-  { nome: "Itaú", src: "/parceiros/itau.png", cls: "h-9 sm:h-11" },
-  { nome: "Porto Seguro", src: "/parceiros/porto-seguro.png", cls: "h-14 sm:h-16" },
-  { nome: "Embracon", src: "/parceiros/embracon.png", cls: "h-14 sm:h-16" },
+  { nome: "Banco do Brasil", src: "/parceiros/banco-do-brasil.png", cls: "h-20 sm:h-24" },
+  { nome: "Itaú", src: "/parceiros/itau.png", cls: "h-9 sm:h-10" },
+  { nome: "Porto Seguro", src: "/parceiros/porto-seguro.png", cls: "h-20 sm:h-24" },
+  { nome: "Embracon", src: "/parceiros/embracon.png", cls: "h-20 sm:h-24" },
 ];
 
 export default function Parceiros() {
