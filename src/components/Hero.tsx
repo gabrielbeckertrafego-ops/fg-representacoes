@@ -42,8 +42,8 @@ export default function Hero() {
     >
       {/* Fundo decorativo */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 right-[-10%] h-[38rem] w-[38rem] rounded-full bg-gold-500/10 blur-3xl" />
-        <div className="absolute bottom-[-15%] left-[-10%] h-[30rem] w-[30rem] rounded-full bg-gold-600/10 blur-3xl" />
+        <div className="absolute -top-40 right-[-10%] h-[26rem] w-[26rem] rounded-full bg-gold-500/10 blur-2xl" />
+        <div className="absolute bottom-[-15%] left-[-10%] hidden h-[22rem] w-[22rem] rounded-full bg-gold-600/10 blur-2xl sm:block" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/0 via-ink/0 to-ink" />
       </div>
 

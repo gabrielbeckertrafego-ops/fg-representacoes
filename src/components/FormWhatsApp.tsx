@@ -18,8 +18,7 @@ export default function FormWhatsApp() {
           data-reveal
           className="grain relative overflow-hidden rounded-3xl border border-gold-500/20 bg-gradient-to-br from-night to-graphite-900 p-8 text-center shadow-soft sm:p-14"
         >
-          <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold-500/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-gold-600/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-gold-500/20 blur-2xl" />
 
           <div className="relative mx-auto max-w-2xl">
             <span className="eyebrow">Comece agora</span>
