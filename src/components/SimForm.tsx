@@ -41,7 +41,7 @@ export default function SimForm({ prefill, onEnviar }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-4">
+    <form onSubmit={onSubmit} noValidate className="space-y-3.5">
       <div>
         <label htmlFor="sf-nome" className="field-label">
           Seu nome *
@@ -105,7 +105,7 @@ export default function SimForm({ prefill, onEnviar }: Props) {
         </label>
         <textarea
           id="sf-msg"
-          rows={3}
+          rows={2}
           value={mensagem}
           onChange={(e) => setMensagem(e.target.value)}
           placeholder="Conte um pouco sobre seu objetivo..."

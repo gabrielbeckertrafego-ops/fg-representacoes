@@ -35,36 +35,34 @@ export default function ComoFunciona() {
   const root = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".passo", {
-          opacity: 0,
-          y: 40,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.15,
-          scrollTrigger: { trigger: ".passos-grid", start: "top 75%" },
-        });
-        gsap.fromTo(
-          ".linha-progresso",
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            transformOrigin: "left center",
-            scrollTrigger: {
-              trigger: ".passos-grid",
-              start: "top 70%",
-              end: "bottom 60%",
-              scrub: true,
-            },
-          }
-        );
-      }, root);
-      return () => ctx.revert();
-    });
-    return () => mm.revert();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".passo",
+        { opacity: 0, y: 22 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: { trigger: ".passos-grid", start: "top 80%" },
+        }
+      );
+      gsap.fromTo(
+        ".linha-progresso",
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1.1,
+          ease: "power2.out",
+          transformOrigin: "left center",
+          scrollTrigger: { trigger: ".passos-grid", start: "top 78%", once: true },
+        }
+      );
+    }, root);
+    return () => ctx.revert();
   }, []);
 
   return (

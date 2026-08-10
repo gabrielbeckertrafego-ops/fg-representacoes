@@ -22,34 +22,23 @@ export default function Estrutura() {
   const root = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".gal-item", {
-          opacity: 0,
-          scale: 0.94,
-          y: 26,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".galeria", start: "top 78%" },
-        });
-        gsap.utils.toArray<HTMLElement>(".gal-img").forEach((img) => {
-          gsap.to(img, {
-            yPercent: -8,
-            ease: "none",
-            scrollTrigger: {
-              trigger: img,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-        });
-      }, root);
-      return () => ctx.revert();
-    });
-    return () => mm.revert();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".gal-item",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: ".galeria", start: "top 82%" },
+        }
+      );
+    }, root);
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -87,7 +76,7 @@ export default function Estrutura() {
                 src={f.src}
                 alt={f.alt}
                 loading="lazy"
-                className="gal-img h-[116%] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="gal-img h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-graphite-900/25 to-transparent" />
             </figure>

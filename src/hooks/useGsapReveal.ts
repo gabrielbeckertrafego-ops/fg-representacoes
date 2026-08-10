@@ -31,16 +31,16 @@ export function useGsapReveal<T extends HTMLElement = HTMLElement>() {
           return;
         }
 
-        gsap.set(targets, { opacity: 0, y: 34 });
+        gsap.set(targets, { opacity: 0, y: 20 });
         gsap.to(targets, {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          ease: "power3.out",
-          stagger: 0.12,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.08,
           scrollTrigger: {
             trigger: el,
-            start: "top 78%",
+            start: "top 82%",
           },
         });
       }

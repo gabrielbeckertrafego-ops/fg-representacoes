@@ -60,24 +60,24 @@ export default function WhatsAppModal() {
 
       {/* Painel */}
       <div
-        className={`relative m-0 w-full max-w-md overflow-hidden rounded-t-3xl border border-white/10 bg-night shadow-2xl transition-all duration-300 sm:m-4 sm:rounded-3xl ${
+        className={`relative flex max-h-[92dvh] w-full max-w-md flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-night shadow-2xl transition-all duration-300 sm:m-4 sm:max-h-[90dvh] sm:rounded-3xl ${
           aberto ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
-        <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gold-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold-500/20 blur-2xl" />
 
         {/* Header do modal */}
-        <div className="relative flex items-start justify-between gap-4 border-b border-white/10 p-6">
+        <div className="relative flex flex-none items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-6">
           <div>
-            <span className="eyebrow mb-3">
+            <span className="eyebrow mb-2.5">
               <ShieldIcon className="h-4 w-4" /> Simulação gratuita
             </span>
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="text-lg font-bold text-white sm:text-xl">
               Fale com a <span className="text-gold-gradient">FG</span>
             </h3>
-            <p className="mt-1 flex items-center gap-1.5 text-sm text-graphite-400">
-              <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
-              Sua mensagem vai pronta para o nosso WhatsApp
+            <p className="mt-1 flex items-center gap-1.5 text-[13px] text-graphite-400 sm:text-sm">
+              <WhatsAppIcon className="h-4 w-4 flex-none text-[#25D366]" />
+              Sua mensagem vai pronta para o WhatsApp
             </p>
           </div>
           <button
@@ -92,7 +92,7 @@ export default function WhatsAppModal() {
         </div>
 
         {/* Corpo */}
-        <div className="relative max-h-[70vh] overflow-y-auto p-6">
+        <div className="relative min-h-0 flex-1 overflow-y-auto p-5 sm:p-6">
           <SimForm prefill={prefill} onEnviar={fechar} />
         </div>
       </div>
