@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink text-graphite-200 font-sans antialiased;
+    font-feature-settings: "ss01", "cv01";
+  }
+  ::selection {
+    @apply bg-gold-500/30 text-white;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .container-fg {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .text-gold-gradient {
+    @apply bg-gold-gradient bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+  .text-gold-shimmer {
+    @apply bg-gold-gradient bg-clip-text text-transparent animate-shimmer;
+    background-size: 200% auto;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5
+      text-sm font-semibold tracking-wide transition-all duration-300
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+      focus-visible:ring-offset-ink;
+  }
+  .btn-gold {
+    @apply btn bg-gold-gradient text-graphite-900 shadow-gold
+      hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-10px_rgba(180,134,58,0.7)]
+      focus-visible:ring-gold-400;
+    background-size: 200% auto;
+  }
+  .btn-whats {
+    @apply btn text-white shadow-[0_12px_36px_-10px_rgba(37,211,102,0.6)]
+      hover:-translate-y-0.5 focus-visible:ring-[#25D366];
+    background-image: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  }
+  .btn-outline {
+    @apply btn border border-graphite-700 bg-white/5 text-graphite-100
+      backdrop-blur hover:border-gold-500 hover:text-white
+      focus-visible:ring-gold-500;
+  }
+
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] backdrop-blur-sm;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold-500/30
+      bg-gold-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em]
+      text-gold-300;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-graphite-700 bg-graphite-800/70 px-4 py-3
+      text-white placeholder-graphite-500 outline-none transition
+      focus:border-gold-500 focus:ring-2 focus:ring-gold-500/25;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-graphite-200;
+  }
+
+  /* Fundo com grão sutil + halo dourado reutilizável */
+  .grain::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 opacity-[0.05];
+    background-image: radial-gradient(circle at 1px 1px, #d4aa4c 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+}
+
+/* Estado inicial dos elementos animados (evita flash antes do JS) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
