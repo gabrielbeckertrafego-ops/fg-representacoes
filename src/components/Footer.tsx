@@ -5,6 +5,7 @@ const LINKS = [
   { href: "#segmentos", label: "Modalidades" },
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#estrutura", label: "A FG" },
+  { href: "#equipe", label: "Equipe" },
   { href: "#parceiros", label: "Parceiros" },
   { href: "#faq", label: "Dúvidas" },
   { href: "#contato", label: "Simular" },

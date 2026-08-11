@@ -5,6 +5,7 @@ import Segmentos from "./components/Segmentos";
 import ComoFunciona from "./components/ComoFunciona";
 import Numeros from "./components/Numeros";
 import Estrutura from "./components/Estrutura";
+import Equipe from "./components/Equipe";
 import Parceiros from "./components/Parceiros";
 import FAQ from "./components/FAQ";
 import FormWhatsApp from "./components/FormWhatsApp";
@@ -26,6 +27,7 @@ export default function App() {
         <ComoFunciona />
         <Numeros />
         <Estrutura />
+        <Equipe />
         <Parceiros />
         <FAQ />
         <FormWhatsApp />
