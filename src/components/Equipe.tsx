@@ -173,8 +173,9 @@ export default function Equipe() {
             loading="lazy"
             className="aspect-[3/2] w-full object-cover object-top sm:aspect-[16/9]"
           />
-          <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
-          <figcaption className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+          {/* No mobile a legenda fica abaixo da foto; no desktop, sobreposta. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-3/5 bg-gradient-to-t from-ink via-ink/60 to-transparent sm:block" />
+          <figcaption className="bg-graphite-900 p-5 sm:absolute sm:inset-x-0 sm:bottom-0 sm:bg-transparent sm:p-8">
             <p className="font-display text-lg font-bold text-white sm:text-2xl">
               Uma equipe inteira à disposição do{" "}
               <span className="text-gold-gradient">seu objetivo</span>
