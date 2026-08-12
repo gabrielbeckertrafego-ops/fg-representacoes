@@ -9,8 +9,6 @@ const ESPECIALISTAS = [
   { foto: "/equipe/especialista-4.jpg", nome: "Filipe Rodrigues", cargo: "Especialista em Consórcio" },
   { foto: "/equipe/especialista-6.jpg", nome: "Júlia Eduarda", cargo: "Especialista em Consórcio" },
   { foto: "/equipe/isabelle-correa.jpg", nome: "Isabelle Correa", cargo: "Especialista em Consórcio" },
-  // Falta o nome desta (blusa bege, óculos) — é só preencher aqui.
-  { foto: "/equipe/especialista-3.jpg", nome: "", cargo: "Especialista em Consórcio" },
 ];
 
 const MARCOS = [
@@ -126,12 +124,13 @@ export default function Equipe() {
             cabe no seu bolso.
           </p>
 
-          {/* flex em vez de grid: com 5 cards a última linha fica centralizada */}
+          {/* flex em vez de grid: se sobrar card na última linha, ele fica centralizado.
+              São 4 especialistas: 2x2 no celular e uma linha só no desktop. */}
           <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
             {ESPECIALISTAS.map((e) => (
               <figure
                 key={e.foto}
-                className="group relative w-[calc(50%-0.5rem)] overflow-hidden rounded-2xl border border-white/10 shadow-soft sm:w-[calc(33.333%-1rem)]"
+                className="group relative w-[calc(50%-0.5rem)] overflow-hidden rounded-2xl border border-white/10 shadow-soft sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
               >
                 <img
                   src={e.foto}
@@ -161,7 +160,9 @@ export default function Equipe() {
           </div>
         </div>
 
-        {/* Foto do time completo */}
+        {/* Foto do time completo.
+            object-[center_30%]: centraliza o grupo no bloco sem cortar o topo do letreiro FG
+            (em 50%/center as letras ficam decapitadas). */}
         <figure
           data-reveal
           className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 shadow-soft"
@@ -172,7 +173,7 @@ export default function Equipe() {
             width={1800}
             height={1205}
             loading="lazy"
-            className="aspect-[3/2] w-full object-cover object-top sm:aspect-[16/9]"
+            className="aspect-[3/2] w-full object-cover object-[center_30%] sm:aspect-[16/9]"
           />
           {/* No mobile a legenda fica abaixo da foto; no desktop, sobreposta. */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-3/5 bg-gradient-to-t from-ink via-ink/60 to-transparent sm:block" />
