@@ -30,6 +30,9 @@ export default function Footer() {
               construção e crédito. Realizando planos com segurança e atendimento
               humano em todo o Brasil.
             </p>
+            <p className="mt-4 text-sm text-graphite-500">
+              CNPJ 50.002.597/0001-81
+            </p>
           </div>
 
           <div>
