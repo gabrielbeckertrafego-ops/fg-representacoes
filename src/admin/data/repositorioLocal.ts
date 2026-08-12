@@ -1,5 +1,5 @@
 import { gravarAgora, gravarBase, lerBase, limparBase } from "./armazenamento";
-import { EVENTO_DADOS, VERSAO_BASE } from "./constantes";
+import { EVENTO_DADOS, NOME_ETAPA, VERSAO_BASE } from "./constantes";
 import { gerarBase } from "./seed";
 import { agora, novoId } from "../lib/id";
 import type { FiltroLeads, FiltroTarefas, FiltroVendas, Repositorio } from "./repositorio";
@@ -140,7 +140,7 @@ export const repositorioLocal: Repositorio = {
         id: novoId("int"),
         leadId: id,
         tipo: "etapa",
-        texto: `Movido para "${etapa}".`,
+        texto: `Movido para "${NOME_ETAPA[etapa]}".`,
         consultorId: lead.consultorId,
         automatica: true,
         criadoEm: agora(),

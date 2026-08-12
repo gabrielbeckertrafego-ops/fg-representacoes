@@ -4,7 +4,12 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import EmBreve from "./components/EmBreve";
 import Dashboard from "./pages/Dashboard";
+import Funil from "./pages/Funil";
+import LeadFicha from "./pages/LeadFicha";
 import { CHAVE_SESSAO, SENHA_PADRAO } from "./data/constantes";
+import { repositorio } from "./data/repositorio";
+import { useDados } from "./data/useDados";
+import type { Configuracao } from "./data/tipos";
 
 // Roteador interno do painel. As rotas são planas (/admin/<tela>) com um único
 // parâmetro possível (/admin/leads/:id), então um split de string basta.
@@ -63,24 +68,37 @@ export default function AdminApp() {
 
   if (!autenticado) return <Login onEntrar={entrar} />;
 
-  const partes = caminho.replace(/^\/admin\/?/, "").split("/").filter(Boolean);
-  const tela = partes[0] ?? "";
-
   return (
     <Layout caminho={caminho} onSair={sair} busca={busca} onBusca={setBusca}>
-      {renderizarTela(tela)}
+      <Telas caminho={caminho} busca={busca} />
     </Layout>
   );
 }
 
-function renderizarTela(tela: string) {
+function Telas({ caminho, busca }: { caminho: string; busca: string }) {
+  const { dados: config } = useDados<Configuracao | null>(
+    "config",
+    () => repositorio.obterConfig(),
+    null
+  );
+
+  const partes = caminho.replace(/^\/admin\/?/, "").split("/").filter(Boolean);
+  const tela = partes[0] ?? "";
+  const parametro = partes[1];
+
+  if (!config) return <div className="card-painel h-40 animate-pulse" />;
+
   switch (tela) {
     case "":
       return <Dashboard />;
     case "funil":
-      return <EmBreve titulo="Funil" subtitulo="Seus leads por etapa" />;
+      return <Funil busca={busca} diasParaEsfriar={config.diasParaEsfriar} />;
     case "leads":
-      return <EmBreve titulo="Leads" subtitulo="Lista completa" />;
+      return parametro ? (
+        <LeadFicha leadId={parametro} modoDemo={config.modoDemo} />
+      ) : (
+        <EmBreve titulo="Leads" subtitulo="Lista completa" />
+      );
     case "agenda":
       return <EmBreve titulo="Agenda" subtitulo="Follow-ups combinados" />;
     case "simulador":
