@@ -6,6 +6,7 @@ import EmBreve from "./components/EmBreve";
 import Dashboard from "./pages/Dashboard";
 import Funil from "./pages/Funil";
 import LeadFicha from "./pages/LeadFicha";
+import Simulador from "./pages/Simulador";
 import { CHAVE_SESSAO, SENHA_PADRAO } from "./data/constantes";
 import { repositorio } from "./data/repositorio";
 import { useDados } from "./data/useDados";
@@ -102,7 +103,7 @@ function Telas({ caminho, busca }: { caminho: string; busca: string }) {
     case "agenda":
       return <EmBreve titulo="Agenda" subtitulo="Follow-ups combinados" />;
     case "simulador":
-      return <EmBreve titulo="Simulador" subtitulo="Calcule a parcela da carta" />;
+      return <Simulador leadIdInicial={parametro} />;
     case "vendas":
       return <EmBreve titulo="Vendas" subtitulo="Adesões fechadas e comissão" />;
     case "equipe":
