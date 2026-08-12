@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import Funil from "./pages/Funil";
 import LeadFicha from "./pages/LeadFicha";
 import Simulador from "./pages/Simulador";
+import Vendas from "./pages/Vendas";
+import Equipe from "./pages/Equipe";
 import { CHAVE_SESSAO, SENHA_PADRAO } from "./data/constantes";
 import { repositorio } from "./data/repositorio";
 import { useDados } from "./data/useDados";
@@ -105,9 +107,9 @@ function Telas({ caminho, busca }: { caminho: string; busca: string }) {
     case "simulador":
       return <Simulador leadIdInicial={parametro} />;
     case "vendas":
-      return <EmBreve titulo="Vendas" subtitulo="Adesões fechadas e comissão" />;
+      return <Vendas />;
     case "equipe":
-      return <EmBreve titulo="Equipe" subtitulo="Consultores, metas e permissões" />;
+      return <Equipe />;
     case "relatorios":
       return <EmBreve titulo="Relatórios" subtitulo="Origem, custo por lead e retorno" />;
     case "integracoes":
