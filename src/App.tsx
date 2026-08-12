@@ -1,40 +1,30 @@
-import { useEffect } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Segmentos from "./components/Segmentos";
-import ComoFunciona from "./components/ComoFunciona";
-import Numeros from "./components/Numeros";
-import Estrutura from "./components/Estrutura";
-import Equipe from "./components/Equipe";
-import Parceiros from "./components/Parceiros";
-import FAQ from "./components/FAQ";
-import FormWhatsApp from "./components/FormWhatsApp";
-import Footer from "./components/Footer";
-import WhatsAppFloat from "./components/WhatsAppFloat";
-import WhatsAppModal from "./components/WhatsAppModal";
+import { lazy, Suspense } from "react";
+import { useRota } from "./hooks/useRota";
+import LandingPage from "./LandingPage";
+
+// ÚNICA ponte permitida com src/admin. Nada mais fora de src/admin/ pode importar
+// de lá — um import solto joga o CRM inteiro dentro do bundle da landing, que é
+// destino de tráfego pago. Confira com:
+//   grep -rn "admin/" src --include="*.tsx" --include="*.ts" | grep -v "^src/admin/" | grep -v "^src/App.tsx"
+const PainelAdmin = lazy(() => import("./admin/AdminApp"));
 
 export default function App() {
-  useEffect(() => {
-    document.documentElement.classList.add("js-ready");
-  }, []);
+  const caminho = useRota();
+  const ehAdmin = caminho === "/admin" || caminho.startsWith("/admin/");
 
-  return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Segmentos />
-        <ComoFunciona />
-        <Numeros />
-        <Estrutura />
-        <Equipe />
-        <Parceiros />
-        <FAQ />
-        <FormWhatsApp />
-      </main>
-      <Footer />
-      <WhatsAppFloat />
-      <WhatsAppModal />
-    </>
-  );
+  if (ehAdmin) {
+    return (
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen items-center justify-center bg-ink">
+            <span className="h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-gold-500" />
+          </div>
+        }
+      >
+        <PainelAdmin />
+      </Suspense>
+    );
+  }
+
+  return <LandingPage />;
 }

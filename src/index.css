@@ -84,6 +84,58 @@
     background-image: radial-gradient(circle at 1px 1px, #d4aa4c 1px, transparent 0);
     background-size: 28px 28px;
   }
+
+  /* ---- Painel /admin ----
+     O site usa botões grandes (px-7 py-3.5) que não servem para uma barra de
+     ferramentas de CRM. Estas variantes menores e o restante ficam aqui, e não
+     num CSS separado, porque @layer components fora deste arquivo quebra o build
+     do Tailwind (não existe @tailwind components lá). */
+  .btn-sm {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2
+      text-[13px] font-semibold transition-all duration-200
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40;
+  }
+  .btn-sm-gold {
+    @apply btn-sm bg-gold-gradient text-graphite-900 hover:brightness-110;
+  }
+  .btn-sm-ghost {
+    @apply btn-sm border border-white/10 bg-white/[0.04] text-graphite-200
+      hover:border-white/20 hover:text-white;
+  }
+  .btn-sm-perigo {
+    @apply btn-sm border border-red-500/25 bg-red-500/10 text-red-300 hover:bg-red-500/20;
+  }
+
+  .card-painel {
+    @apply rounded-2xl border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm;
+  }
+
+  .field-sm {
+    @apply w-full rounded-xl border border-white/10 bg-graphite-800/70 px-3 py-2 text-sm
+      text-white placeholder-graphite-500 outline-none transition
+      focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold;
+  }
+
+  .rotulo-painel {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-graphite-500;
+  }
+
+  .linha-tabela {
+    @apply border-b border-white/[0.06] transition-colors hover:bg-white/[0.03];
+  }
+}
+
+/* O site usa rolagem suave para os links âncora; dentro do painel isso transforma
+   qualquer scrollTo numa animação lenta e tira a sensação de aplicativo. */
+html.admin-ativo {
+  scroll-behavior: auto;
+}
+html.admin-ativo body {
+  @apply text-graphite-300;
 }
 
 /* Estado inicial dos elementos animados (evita flash antes do JS) */
