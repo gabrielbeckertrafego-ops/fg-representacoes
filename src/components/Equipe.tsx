@@ -5,12 +5,12 @@ import { WhatsAppIcon } from "./Icons";
 // NOTA (FG): assim que tiver os nomes, basta preencher o campo `nome`.
 // Deixando "" o card mostra apenas o cargo — nada quebra.
 const ESPECIALISTAS = [
-  { foto: "/equipe/especialista-1.jpg", nome: "", cargo: "Especialista em Consórcio" },
-  { foto: "/equipe/especialista-2.jpg", nome: "", cargo: "Especialista em Consórcio" },
+  { foto: "/equipe/especialista-1.jpg", nome: "Adriele Narciso", cargo: "Especialista em Consórcio" },
+  { foto: "/equipe/especialista-4.jpg", nome: "Filipe Rodrigues", cargo: "Especialista em Consórcio" },
+  { foto: "/equipe/especialista-6.jpg", nome: "Júlia Eduarda", cargo: "Especialista em Consórcio" },
+  { foto: "/equipe/isabelle-correa.jpg", nome: "Isabelle Correa", cargo: "Especialista em Consórcio" },
+  // Falta o nome desta (blusa bege, óculos) — é só preencher aqui.
   { foto: "/equipe/especialista-3.jpg", nome: "", cargo: "Especialista em Consórcio" },
-  { foto: "/equipe/especialista-4.jpg", nome: "", cargo: "Especialista em Consórcio" },
-  { foto: "/equipe/especialista-5.jpg", nome: "", cargo: "Especialista em Consórcio" },
-  { foto: "/equipe/especialista-6.jpg", nome: "", cargo: "Especialista em Consórcio" },
 ];
 
 const MARCOS = [
@@ -126,11 +126,12 @@ export default function Equipe() {
             cabe no seu bolso.
           </p>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
+          {/* flex em vez de grid: com 5 cards a última linha fica centralizada */}
+          <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
             {ESPECIALISTAS.map((e) => (
               <figure
                 key={e.foto}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 shadow-soft"
+                className="group relative w-[calc(50%-0.5rem)] overflow-hidden rounded-2xl border border-white/10 shadow-soft sm:w-[calc(33.333%-1rem)]"
               >
                 <img
                   src={e.foto}
