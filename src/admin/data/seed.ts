@@ -181,7 +181,10 @@ export function gerarBase(): BaseDados {
   const usados = new Set<string>();
   const contagemPorEtapa: Record<string, number> = {};
 
-  const TOTAL_LEADS = 152;
+  // 320 leads em 120 dias (~85/mês) para ~5 adesões mensais: conversão de ~6%,
+  // que é o que uma operação boa de consórcio faz. Com menos leads a tela de
+  // Relatórios mostrava 25% de conversão, e ninguém do ramo acredita nisso.
+  const TOTAL_LEADS = 320;
 
   for (let i = 0; i < TOTAL_LEADS; i += 1) {
     // Mais peso nos últimos 30 dias: o funil precisa parecer vivo.
@@ -275,7 +278,30 @@ export function gerarBase(): BaseDados {
   // ---- Vendas: 8 meses de história, crescendo devagar, com o mês corrente
   // parcialmente preenchido para o medidor de meta ter o que contar.
   const vendas: Venda[] = [];
-  const leadsAdesao = leads.filter((l) => l.etapa === "adesao");
+  // As vendas do mês são vinculadas a leads de origens INTERCALADAS. Pegando na
+  // ordem natural, saíam quase todas de Meta Ads e o relatório mostrava 25% de
+  // conversão num canal só — número que ninguém do ramo acredita.
+  const porOrigemAdesao = new Map<Origem, Lead[]>();
+  leads
+    .filter((l) => l.etapa === "adesao")
+    .forEach((l) => {
+      const atual = porOrigemAdesao.get(l.origem) ?? [];
+      atual.push(l);
+      porOrigemAdesao.set(l.origem, atual);
+    });
+
+  const leadsAdesao: Lead[] = [];
+  let restam = true;
+  while (restam) {
+    restam = false;
+    porOrigemAdesao.forEach((lista) => {
+      const proximo = lista.shift();
+      if (proximo) {
+        leadsAdesao.push(proximo);
+        restam = true;
+      }
+    });
+  }
   let indiceLeadAdesao = 0;
 
   for (let voltarMeses = 7; voltarMeses >= 0; voltarMeses -= 1) {
@@ -437,14 +463,14 @@ export function gerarBase(): BaseDados {
         origem: "meta-ads",
         ano: base.getFullYear(),
         mes: base.getMonth() + 1,
-        valor: Math.round(inteiro(1600, 2400) * fator),
+        valor: Math.round(inteiro(2600, 3600) * fator),
       },
       {
         id: `inv-google-${base.getFullYear()}-${base.getMonth() + 1}`,
         origem: "google-ads",
         ano: base.getFullYear(),
         mes: base.getMonth() + 1,
-        valor: Math.round(inteiro(700, 1100) * fator),
+        valor: Math.round(inteiro(1200, 1800) * fator),
       }
     );
   }

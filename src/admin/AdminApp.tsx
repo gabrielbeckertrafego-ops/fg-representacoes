@@ -9,6 +9,8 @@ import LeadFicha from "./pages/LeadFicha";
 import Simulador from "./pages/Simulador";
 import Vendas from "./pages/Vendas";
 import Equipe from "./pages/Equipe";
+import Integracoes from "./pages/Integracoes";
+import Relatorios from "./pages/Relatorios";
 import { CHAVE_SESSAO, SENHA_PADRAO } from "./data/constantes";
 import { repositorio } from "./data/repositorio";
 import { useDados } from "./data/useDados";
@@ -111,9 +113,9 @@ function Telas({ caminho, busca }: { caminho: string; busca: string }) {
     case "equipe":
       return <Equipe />;
     case "relatorios":
-      return <EmBreve titulo="Relatórios" subtitulo="Origem, custo por lead e retorno" />;
+      return <Relatorios />;
     case "integracoes":
-      return <EmBreve titulo="Integrações" subtitulo="WhatsApp, anúncios e formulários" />;
+      return <Integracoes />;
     case "config":
       return <EmBreve titulo="Configurações" subtitulo="Taxas, senha e demonstração" />;
     default:
