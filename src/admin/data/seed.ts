@@ -285,8 +285,9 @@ export function gerarBase(): BaseDados {
     const ehMesCorrente = voltarMeses === 0;
     const diasNoMes = new Date(ano, mes, 0).getDate();
 
-    // Volume cresce ~8% ao mês; o mês corrente vem incompleto de propósito.
-    const quantas = ehMesCorrente ? 3 : inteiro(3, 6);
+    // O mês corrente vem incompleto de propósito: é o que faz o medidor de meta
+    // contar uma história ("falta pouco") em vez de parecer estático.
+    const quantas = ehMesCorrente ? 5 : inteiro(3, 6);
 
     for (let k = 0; k < quantas; k += 1) {
       const modalidade = sortearPeso(PESO_MODALIDADE);
@@ -295,7 +296,9 @@ export function gerarBase(): BaseDados {
       const credito = valorCarta(modalidade);
       const totalPlano = credito * (1 + padrao.taxaAdministracao / 100 + padrao.fundoReserva / 100);
       const parcela = totalPlano / prazo + credito * (padrao.seguroMensal / 100);
-      const consultor = escolher(consultores);
+      // No mês corrente as vendas circulam pelo time, para o ranking não abrir
+      // com metade da equipe zerada na frente dela.
+      const consultor = ehMesCorrente ? consultores[k % consultores.length] : escolher(consultores);
       const diaLimite = ehMesCorrente ? Math.min(hoje.getDate(), diasNoMes) : diasNoMes;
       const dia = inteiro(1, Math.max(1, diaLimite));
       const dataAdesao = new Date(ano, mes - 1, dia, 14, 0, 0).toISOString();
@@ -419,7 +422,11 @@ export function gerarBase(): BaseDados {
     });
   }
 
-  // ---- Investimento de mídia, coerente com o CPL de cada canal
+  // ---- Investimento de mídia.
+  // Os valores são calibrados pelo volume de leads que este seed gera (~40/mês):
+  // dão custo por lead na casa de R$ 45 no Meta e R$ 100 no Google, que é o que
+  // se vê em consórcio (ticket alto, lead caro). Se mexer no total de leads,
+  // mexa aqui junto, senão o CPL da tela de Relatórios fica irreal.
   const investimentos: Investimento[] = [];
   for (let voltarMeses = 7; voltarMeses >= 0; voltarMeses -= 1) {
     const base = new Date(anoAtual, mesAtual - 1 - voltarMeses, 1);
@@ -430,14 +437,14 @@ export function gerarBase(): BaseDados {
         origem: "meta-ads",
         ano: base.getFullYear(),
         mes: base.getMonth() + 1,
-        valor: Math.round(inteiro(4200, 6800) * fator),
+        valor: Math.round(inteiro(1600, 2400) * fator),
       },
       {
         id: `inv-google-${base.getFullYear()}-${base.getMonth() + 1}`,
         origem: "google-ads",
         ano: base.getFullYear(),
         mes: base.getMonth() + 1,
-        valor: Math.round(inteiro(1800, 3200) * fator),
+        valor: Math.round(inteiro(700, 1100) * fator),
       }
     );
   }
