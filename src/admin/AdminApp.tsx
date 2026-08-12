@@ -11,6 +11,9 @@ import Vendas from "./pages/Vendas";
 import Equipe from "./pages/Equipe";
 import Integracoes from "./pages/Integracoes";
 import Relatorios from "./pages/Relatorios";
+import Configuracoes from "./pages/Configuracoes";
+import Agenda from "./pages/Agenda";
+import Leads from "./pages/Leads";
 import { CHAVE_SESSAO, SENHA_PADRAO } from "./data/constantes";
 import { repositorio } from "./data/repositorio";
 import { useDados } from "./data/useDados";
@@ -102,10 +105,10 @@ function Telas({ caminho, busca }: { caminho: string; busca: string }) {
       return parametro ? (
         <LeadFicha leadId={parametro} modoDemo={config.modoDemo} />
       ) : (
-        <EmBreve titulo="Leads" subtitulo="Lista completa" />
+        <Leads busca={busca} />
       );
     case "agenda":
-      return <EmBreve titulo="Agenda" subtitulo="Follow-ups combinados" />;
+      return <Agenda />;
     case "simulador":
       return <Simulador leadIdInicial={parametro} />;
     case "vendas":
@@ -117,7 +120,7 @@ function Telas({ caminho, busca }: { caminho: string; busca: string }) {
     case "integracoes":
       return <Integracoes />;
     case "config":
-      return <EmBreve titulo="Configurações" subtitulo="Taxas, senha e demonstração" />;
+      return <Configuracoes />;
     default:
       return <EmBreve titulo="Tela não encontrada" subtitulo={`Nada em /admin/${tela}`} />;
   }

@@ -111,17 +111,37 @@ visitante. No dia em que entrar telefone de cliente, isto vira Supabase Auth com
 RLS por dono do lead, e o rewrite do `vercel.json` precisa passar a excluir
 `/api/*`: `{"source": "/((?!api/).*)", "destination": "/"}`.
 
+## As 10 telas
+
+| Rota | O que faz |
+|---|---|
+| `/admin` | Painel: 8 indicadores do mês, medidor de meta, evolução, funil, origem, modalidade, ranking do time e próximos follow-ups |
+| `/admin/funil` | Kanban arrastável; coluna mostra quantidade **e soma da carta**; soltar em "perdido" pergunta o motivo |
+| `/admin/leads` | Lista com filtros, cadastro manual e exportar CSV |
+| `/admin/leads/:id` | Ficha: dados, origem/campanha, timeline, notas, etapa, dono, temperatura, agendar retorno |
+| `/admin/agenda` | Follow-ups em atrasados / hoje / próximos dias, mais os já resolvidos |
+| `/admin/simulador` | Calcula parcela, composição, lance e comparativo com financiamento; gera a mensagem do WhatsApp |
+| `/admin/vendas` | Adesões, comissão parcelada e aba de pós-venda (contempladas, inadimplentes) |
+| `/admin/equipe` | Cadastro livre de consultores com meta, comissão, permissão; rodízio de leads |
+| `/admin/relatorios` | Origem × verba × CPL × adesões × CAC × retorno em comissão |
+| `/admin/integracoes` | Seis canais com conectar, status e **"receber lead de teste"** |
+| `/admin/config` | Taxas por modalidade, senha, exportar/importar, reiniciar demo, atualizar datas |
+
+### Números do seed (e por que eles são esses)
+
+320 leads em 120 dias (~85/mês) para ~5 adesões mensais dão **conversão de ~6%** e
+**retorno de ~9x** sobre a mídia. Com os 152 leads iniciais a tela de Relatórios
+mostrava 25% de conversão e 25x de retorno — números que ninguém do ramo acredita.
+**Se mexer no total de leads, mexa junto na verba de mídia** (`investimentos` no
+`seed.ts`), senão o CPL sai irreal.
+
 ## Estado atual
 
-- [x] Etapa 1 — rota e isolamento da landing
-- [x] Etapa 2 — shell: login, sidebar, topbar, 10 telas navegáveis
-- [x] Etapa 3 — camada de dados, repositório e seed
-- [ ] Etapa 4 — funil kanban e ficha do lead
-- [ ] Etapa 5 — dashboard com KPIs e gráficos
-- [ ] Etapa 6 — simulador de consórcio
-- [ ] Etapa 7 — vendas e equipe
-- [ ] Etapa 8 — integrações e relatórios
-- [ ] Etapa 9 — configurações, proteção e acabamento
+Todas as 9 etapas concluídas. O painel está completo e navegável.
+
+O que fica para quando virar produção: Supabase no lugar do `repositorioLocal`,
+login por consultor, webhooks reais de WhatsApp e Meta Lead Ads, e as taxas
+calibradas com a Priscila.
 
 ## Antes de apresentar
 
